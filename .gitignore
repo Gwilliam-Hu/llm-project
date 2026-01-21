@@ -3,5 +3,3 @@ __pycache__/
 *.ckpt
 *.pt
 *.bin
-data/raw/
-data/cleaned/
