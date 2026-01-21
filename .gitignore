@@ -1,0 +1,7 @@
+__pycache__/
+*.log
+*.ckpt
+*.pt
+*.bin
+data/raw/
+data/cleaned/
