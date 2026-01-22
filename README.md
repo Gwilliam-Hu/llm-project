@@ -12,3 +12,16 @@ ll data/cleaned/<br>
 head -n 5  data/cleaned/cleaned.jsonl<br>
 vi scripts/stats_length.py<br>
 python3 scripts/stats_length.py<br>
+
+
+"""
+mean: 480.35147845887025<br> 
+p50: 365.0 <br>
+p90: 1031.0 <br>
+p99: 1641.0 <br>
+max: 3168 <br>
+total tokens: 45144873<br>
+"""
+
+
+Pretrain max_seq_len = 2048
