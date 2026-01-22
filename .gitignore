@@ -1,5 +1,4 @@
 __pycache__/
 *.log
 *.ckpt
-*.pt
 *.bin
