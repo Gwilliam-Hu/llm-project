@@ -54,9 +54,10 @@ def main():
 
         input_ids = batch["input_ids"].to(device)
         labels = batch["labels"].to(device)
-
+        attention_mask = torch.ones_like(input_ids)
         outputs = model(
             input_ids=input_ids,
+            attention_mask=attention_mask,
             labels=labels
         )
 
