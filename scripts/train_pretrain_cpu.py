@@ -32,7 +32,9 @@ def main():
     print("Loading model...")
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
-        trust_remote_code=True
+        trust_remote_code=True,
+        attn_implementation="eager",  # forbidden SDPA
+        use_cache=False
     ).to(device)
     model.train()
 
@@ -54,11 +56,25 @@ def main():
 
         input_ids = batch["input_ids"].to(device)
         labels = batch["labels"].to(device)
-        attention_mask = torch.ones_like(input_ids)
+        seq_len = input_ids.size(0)
+
+        attention_mask = torch.ones(
+            (1, seq_len),
+            dtype=torch.long,
+            device=device
+        )
+
+        position_ids = torch.arange(
+            seq_len,
+            dtype=torch.long,
+            device=device
+        ).unsqueeze(0)
+
         outputs = model(
-            input_ids=input_ids,
+            input_ids=input_ids.unsqueeze(0),
             attention_mask=attention_mask,
-            labels=labels
+            position_ids=position_ids,
+            labels=labels.unsqueeze(0)
         )
 
         loss = outputs.loss
